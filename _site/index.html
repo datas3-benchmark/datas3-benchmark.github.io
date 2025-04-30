@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<link href="https://fonts.cdnfonts.com/css/chalkduster" rel="stylesheet">
+<style>
+    @import url('https://fonts.cdnfonts.com/css/chalkduster');
+</style>
+
+<head>
+    <!--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>-->
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="leaderboard.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://www.google.com/jsapi" type="text/javascript"></script>-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
+    <link href="style.css" rel="stylesheet" />
+    <link href="fontawesome.all.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+	<script defer src="fontawesome.all.min.js"></script>
+
+    <script src="script.js"></script>
+
+    <link rel="icon" type="image/png" href="webpage_assets/dreamsim_icon.png" />
+
+    <title>DataS^3: Dataset Subset Selection for Specialization</title>
+    <meta property="og:image" content="./webpage_assets/teaser.jpg">
+    <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+    <meta property="og:title" content="DataS^3: Dataset Subset Selection for Specialization">
+    <meta property="og:description" content="We generate a new benchmark of synthetic image triplets that span a wide range of mid-level variations, labeled with human similarity judgments.
+											The dots below each image indicate which image is considered most similar to the reference by humans vs several existing metrics and our new metric, DreamSim.">
+
+    <!-- Get from Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src=""></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-75863369-6');
+    </script>
+</head>
+
+<body>
+    <br>
+    <center>
+        <span class="near-black" style="font-size:36px;font-weight:bold">DataS^3: Dataset Subset Selection for Specialization</span>
+        <br>
+        <span class="near-black" style="font-size:22px">Anonymous Authors</span>
+        <!-- <br> -->
+		<!-- <span class="near-black" style="font-size:36px;font-weight:bold">Human Visual Similarity using Synthetic Data</span> -->
+        <br>
+        <!-- <table align="center" width="900px">
+            <tbody>
+                <tr>
+                    <td align="center" width="215px">
+                        <center>
+                            <span style="font-size:22px"><a href="https://stephanie-fu.github.io/">Stephanie
+                                    Fu</a><sup style="vertical-align: sub;padding-left: 2px">*</sup><sup style="font-size: 0.7em;">1</sup>
+                                </span>
+                        </center>
+                    </td>
+                    <td align="center" width="235px">
+                        <center>
+                            <span style="font-size:22px"><a href="https://netanel-tamir.github.io/">Netanel Y.
+                                    Tamir</a><sup style="vertical-align: sub;padding-left: 2px">*</sup><sup
+                                        style="font-size: 0.7em;">2</sup></span>
+                        </center>
+                    </td>
+                    <td align="center" width="260px">
+                        <center>
+                            <span style="font-size:22px"><a href="https://ssundaram21.github.io/">Shobhita
+                                    Sundaram</a><sup style="vertical-align: sub;padding-left: 2px">*</sup><sup
+                                        style="font-size: 0.7em;">1</sup></span>
+                        </center>
+                    </td>
+                    <td align="center" width="190px">
+                        <center>
+                            <span style="font-size:22px"><a href="https://people.csail.mit.edu/lrchai/">Lucy
+                                    Chai</a><sup style="font-size: 0.7em;padding-left: 1px;">1</sup></span>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+        <!-- <table align="center" width="675px">
+            <tbody>
+                <tr>
+                    <td align="center" width="225px">
+                        <center>
+                            <span style="font-size:22px"><a href="http://richzhang.github.io/">Richard Zhang</a><sup
+                                        style="font-size: 0.7em;padding-left: 2px;">3</sup></span>
+                        </center>
+                    </td>
+                    <td align="center" width="225px">
+                        <center>
+                            <span style="font-size:22px"><a href="https://www.weizmann.ac.il/math/dekel/home">Tali
+                                    Dekel</a><sup style="font-size: 0.7em;padding-left: 2px;">2</sup></span>
+                        </center>
+                    </td>
+                    <td align="center" width="225px">
+                        <center>
+                            <span style="font-size:22px"><a href="http://web.mit.edu/phillipi/">Phillip Isola</a><sup
+                                        style="font-size: 0.7em;padding-left: 1px;">1</sup></span>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+        <!-- <table align="center" width="600px">
+            <tbody>
+                <tr>
+                    <td style="padding:10px">
+						<sup style="padding-right: 2px;font-size: 18px;top: -0.85em;">1</sup><img style="height:45px" src="./webpage_assets/MIT.png">
+                    </td>
+                    <td style="padding:10px">
+						<sup style="padding-right: 2px;font-size: 18px;top: -0.85em;">2</sup><img style="height:45px" src="./webpage_assets/WIS.png">
+                    </td>
+                    <td style="padding:10px">
+						<sup style="padding-right: 2px;font-size: 18px;top: -0.85em;">3</sup><img style="height:45px" src="./webpage_assets/Adobe.png">
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+
+        <!-- <table align="center" width="500px">
+            <tbody>
+                <tr>
+                    <td align="center" width="500px">
+                        <center>
+                            <i><span style="font-size:14px">* Equal contribution, order decided by random
+                                    seed</span></i>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+        <table width="800" border="0" align="center" class="menu"
+            style="margin-bottom: 20px;margin-top: 20px;font-weight: bold;font-size: 20px;">
+            <tbody>
+                <tr>
+                    <td align="center">
+						<!--<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="color:inherit;text-decoration:none;font-size:15px" href="./2306.09344.pdf" target="_blank">
+							<i style="padding-right:2px;font-size:23px" class="fa fa-file-pdf" aria-hidden="true"></i>
+							Paper
+							</a>
+						</span>-->
+						<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="vertical-align:sub;color:inherit;text-decoration:none;font-size:15px" href="https://arxiv.org/abs/2306.09344" target="_blank">
+							<i style="padding-right:2px;font-size:20px" class="ai ai-arxiv" aria-hidden="true"></i>
+							Arxiv
+							</a>
+						</span>
+						<!-- <span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="color:inherit;text-decoration:none;font-size:15px" href="supplemental.html" target="_blank">
+							<i style="padding-right:2px;font-size:23px" class="fa fa-file-code" aria-hidden="true"></i>
+							Supplementary Material
+							</a>
+						</span> -->
+						<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="color:inherit;text-decoration:none;font-size:15px" href="https://github.com/ssundaram21/dreamsim" target="_blank">
+							<i style="padding-right:2px;font-size:23px" class="fab fa-github" aria-hidden="true"></i>
+							Code & Data
+							</a>
+						</span>
+						<!-- <span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<span style="display:inline-flex;padding-top:4.2px">
+							<a style="vertical-align:text-top;color:inherit;text-decoration:none;font-size:15px" href="https://colab.research.google.com/drive/1taEOMzFE9g81D9AwH27Uhy2U82tQGAVI?usp=sharing" target="_blank">
+							<img style="padding-bottom:3px;padding-right:2px;height:18px" src="webpage_assets/colab.png" aria-hidden="true"></img>
+							Colab
+							</span>
+							</a>
+						</span> -->
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+						<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="vertical-align:sub;color:inherit;text-decoration:none;font-size:15px" href="https://voxel51.com/blog/teaching-androids-to-dream-of-sheep/" target="_blank">
+							<img style="padding-bottom:5px;padding-right:2px;font-size:20px;height:22px" src="webpage_assets/voxel51.png" aria-hidden="true"></img>
+							Blog Post
+							</a>
+						</span>
+						<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="vertical-align:sub;color:inherit;text-decoration:none;font-size:15px" href="https://try.fiftyone.ai/datasets/nights/samples" target="_blank">
+							<img style="padding-bottom:5px;padding-right:2px;font-size:20px;height:22px" src="webpage_assets/voxel51.png" aria-hidden="true"></img>
+							Explore the Dataset!
+							</a>
+						</span>
+						<span class="bg-near-black f6 no_hover br-pill ph3 pv2 dib" style="vertical-align:top;height:36px">
+							<a style="vertical-align:sub;color:inherit;text-decoration:none;font-size:15px" href="#bibtex" target="_self">
+							<i style="padding-right:2px;font-size:20px" class="fa fa-quote-left" aria-hidden="true"></i>
+							Bibtex
+							</a>
+						</span>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+
+    </center>
+
+    <center>
+        <img class="round" style="width:1000px" src="imgs/teaser.jpeg">
+    </center>
+    <br>
+	<p id="teaser-description" style="width:1000px" >
+		Foundation model training aims for broad generalization, by using all data available, usually from massive internet-scale datasets.  
+        In practice, we find these models are often suboptimal for specific deployments, which may exhibit different distributions over categories or data characteristics from the general training data pool. 
+        Dataset subset selection for specialization seeks to identify model training subsets closely aligned with the target deployment, achieving superior performance under the given distribution and attribute shifts.
+    </p>
+	<br>
+    <hr>
+
+    <center>
+        <h1>Abstract</h1>
+    </center>
+    <table align="center" width="1000px">
+
+        <tbody>
+            <tr>
+                <td>
+                    In many real-world machine learning (ML) applications (e.g. detecting broken bones in x-ray images, detecting species in camera traps), 
+                    in practice models need to perform well on specific deployments (e.g. a specific hospital, a specific national park) rather than the domain broadly. 
+                    However, deployments often have imbalanced, unique data distributions. Discrepancy between the training distribution and the deployment distribution 
+                    can lead to suboptimal performance, highlighting the need to select deployment-specialized subsets from the available training data. 
+                    <br>
+                    <br>
+                    We formalize dataset subset selection for specialization (DS3): given a training set drawn from a general distribution and a (potentially unlabeled) query set
+                     drawn from the desired deployment-specific distribution, the goal is to select a subset of the training data that optimizes deployment performance.
+                    <br>
+                    <br>
+                    We introduce DataS^3; the first dataset and benchmark designed specifically for the DS3 problem.
+                    DataS^3 encompasses diverse real-world application domains, each with a set of distinct deployments to specialize in. 
+                    We conduct a comprehensive study evaluating algorithms from various families—including coresets, data filtering, and data curation—on DataS^3, and find that 
+                    general-distribution methods consistently fail on deployment-specific tasks. Additionally, we demonstrate the existence of manually curated (deployment-specific)
+                     expert subsets that outperform training on all available data with accuracy gains up to 51.3 percent. 
+                     Our benchmark highlights the critical role of tailored dataset curation in enhancing performance and training efficiency on deployment-specific distributions, 
+                     which we posit will only become more important as global, public datasets become available across domains and ML models are deployed in the real world.
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <!-- <center>
+        <h1>Installation and Usage</h1>
+    </center>
+    <div class="container-fluid" id="code-container" align="center" width="900px">
+        <div class="row">
+            <div class="col" id="pip-container" class="code-col" style="flex-direction: column;display:flex;" >
+            <p>Installation:</p>
+            <code>
+                pip install dreamsim
+            </code>
+			<br>
+			<div style="flex-grow: 1;"></div>
+			<p>Preliminaries:</p>
+            <code>
+            from dreamsim import dreamsim
+			<br>
+			from PIL import Image
+			<br>
+			<br>
+			model, preprocess = dreamsim(pretrained=True, cache_dir="~/.cache")
+            </code>
+            </div>
+            <div class="col" id="example-container" class="code-col" style="flex-direction: column;display:flex;">
+                <p>Usage:</p>
+                <code>
+				# Feature extraction
+				<br>
+                img1 = preprocess(Image.open("img1_path"))
+                <br><br>
+                embedding = model.embed(img1)
+                <br>
+                <br>
+				# Perceptual similarity metric
+				<br>
+                img1 = preprocess(Image.open("img1_path"))
+                <br>
+                img2 = preprocess(Image.open("img2_path"))
+                <br>
+				<br>
+                distance = model(img1, img2)
+            </code>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr> -->
+
+
+    <center>
+        <h1>Benchmark Process</h1>
+    </center>
+
+    <center>
+        <!-- <div class="container-fluid" id="method-container" align="center" width="900px">
+            <div class="row">
+                <div class="col" id="method-figure">
+                    <img class="round" style="width:500px" src="imgs/benchmark-process/benchmark-process.001.jpeg">
+                </div>
+                <div class="col" id="method-description">
+                    Our perceptual metric is a pairwise image distance, computed as the cosine distance
+                    between concatenated backbone model features. We train via a hinge loss on image triplets,
+                    training via <a style="color:#f14d68" href="https://arxiv.org/abs/2106.09685">Low-Rank Adaptation (LoRA)</a>.
+
+            </div>
+        </div> -->
+        <img class="round" style="width:1000px" src="imgs/benchmark-process/benchmark-process.001.jpeg">
+        <p id="teaser-description" style="width:1100px" >
+            The benchmark is split into several steps, including (1) data splitting, (2) subset selection, (3) finetuning, and (4) evaluation. 
+        </p>
+    </center>
+    <br>
+    <!-- <center>
+        <h1>Deployment Visualizations</h1>
+    </center>
+    <br> -->
+    <!-- <table width="900px" border="0" align="center">
+        <tbody>
+            <tr>
+                <div id="nnCarousel" class="carousel slide teaser-carousel" data-ride="carousel" data-interval="7000">
+				    <ol class="carousel-indicators">
+                        <li data-target="#nnCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#nnCarousel" data-slide-to="1"></li>
+                        <li data-target="#nnCarousel" data-slide-to="2"></li>
+                        <li data-target="#nnCarousel" data-slide-to="3"></li>
+                        <li data-target="#nnCarousel" data-slide-to="4"></li>
+                        <li data-target="#nnCarousel" data-slide-to="5"></li>
+                        <li data-target="#nnCarousel" data-slide-to="6"></li>
+                        <li data-target="#nnCarousel" data-slide-to="7"></li>
+                        <li data-target="#nnCarousel" data-slide-to="8"></li>
+                        <li data-target="#nnCarousel" data-slide-to="9"></li>
+                    </ol>
+<!-- 
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div>
+                                <img class="teaser-img" src="imgs/deployment_viz/autoarborist_viz.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="teaser-img" src="imgs/deployment_viz/fishdetection_viz.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="teaser-img" src="imgs/deployment_viz/geode_viz.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="teaser-img" src="imgs/deployment_viz/iwildcam_viz.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="teaser-img" src="imgs/deployment_viz/nuscenes_viz.jpeg">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- <a class="carousel-control-prev" href="#nnCarousel" role="button" data-slide="prev"
+                        style="height: 500px;">
+                        <div class="slider-navigation-previous">
+                            <svg viewBox="0 0 50 80" xml:space="preserve" style="margin-right: 4px;">
+                                <polyline fill="white" stroke-width=".5em" stroke-linecap="round"
+                                    stroke-linejoin="round" points="45.63,75.8 0.375,38.087 45.63,0.375 ">
+                                </polyline>
+                            </svg>
+                        </div>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#nnCarousel" role="button" data-slide="next"
+                        style="height: 500px;">
+                        <div class="slider-navigation-next">
+                            <svg viewBox="0 0 50 80" xml:space="preserve" style="margin-left: 4px;">
+                                <polyline fill="white" stroke-width=".5em" stroke-linecap="round"
+                                    stroke-linejoin="round" points="0.375,0.375 45.63,38.087 0.375,75.8 ">
+                                </polyline>
+                            </svg>
+                        </div>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	<p id="nn-description">
+        <span id="bold">Nearest-neighbor retrieval.</span>
+        We perform a nearest neighbor search on the ImageNet-R and COCO datasets using different metrics.
+		Although the datasets include images outside of our training domain, our model consistently retrieves neighbors with similar appearance and class to that of the query image.
+    </p> --> 
+    <hr>
+    <center>
+        <h1>Dataset Domains</h1>
+    </center>
+    <table width="1000px" border="0" align="center">
+        <tbody>
+            <tr>
+                <div id="inversionCarousel" class="carousel slide inversion-carousel" data-ride="carousel"
+                    data-interval="7000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div>
+                                <img class="inversion-img" src="imgs/deployment_viz_map.001.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="inversion-img" src="imgs/deployment_viz_map.002.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="inversion-img" src="imgs/deployment_viz_map.003.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="inversion-img" src="imgs/deployment_viz_map.004.jpeg">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div>
+                                <img class="inversion-img" src="imgs/deployment_viz_map.005.jpeg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <ol class="carousel-indicators" style="bottom: -35px;">
+                        <li data-target="#inversionCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#inversionCarousel" data-slide-to="1"></li>
+                        <li data-target="#inversionCarousel" data-slide-to="2"></li>
+                        <li data-target="#inversionCarousel" data-slide-to="3"></li>
+                        <li data-target="#inversionCarousel" data-slide-to="4"></li>
+                    </ol>
+
+                    <a class="carousel-control-prev" href="#inversionCarousel" role="button" data-slide="prev"
+                        style="height: 500px;">
+                        <div class="slider-navigation-previous">
+                            <svg viewBox="0 0 50 80" xml:space="preserve" style="margin-right: 4px;">
+                                <polyline fill="white" stroke-width=".5em" stroke-linecap="round"
+                                    stroke-linejoin="round" points="45.63,75.8 0.375,38.087 45.63,0.375 ">
+                                </polyline>
+                            </svg>
+                        </div>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#inversionCarousel" role="button" data-slide="next"
+                        style="height: 500px;">
+                        <div class="slider-navigation-next">
+                            <svg viewBox="0 0 50 80" xml:space="preserve" style="margin-left: 4px;">
+                                <polyline fill="white" stroke-width=".5em" stroke-linecap="round"
+                                    stroke-linejoin="round" points="0.375,0.375 45.63,38.087 0.375,75.8 ">
+                                </polyline>
+                            </svg>
+                        </div>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <p id="inversion-description">
+        The five datasets in our benchmark: iWildCam, GeoDE, AutoArborist, FishDetection, and NuScenes each have real-world applications in deployment. 
+        In iWildCam, GeoDE, and AutoArborist, we show the class distributions of each deployment; in FishDetection, the number of detections per image is shown, and in NuScenes environment/output features. 
+        These diagrams show that each dataset has unique challenges in the deployments that lead to a need for model specialization, including long-tailedness (AutoArborist, iWildCam), covariate shift (all),  
+        subpopulation shifts (GeoDE, FishDetection), and more.
+    </p>
+    <!-- <br>
+    <hr>
+    <center>
+        <h1>Acknowledgements</h1>
+        <table align="center" width="900px">
+            <tbody>
+                <tr>
+                    <td>
+                        We thank Jim DiCarlo, Liad Mudrik, Nitzan Censor for fruitful discussions throughout the project. Additionally, we thank Narek Tumanyan for his insightful comments over the course of the project. Finally, we thank Michelle Li for proofreading sections of this paper and offering helpful comments.
+						<br>
+						<br>
+						This work was supported by the NSF GRFP Fellowship to Shobhita Sundaram, the Meta PhD Fellowship to Lucy Chai, the Israeli Science Foundation (grant 2303/20) to Tali Dekel, and the Packard Fellowship to Phillip Isola. 
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <br> -->
+    <hr>
+
+    <center>
+        <h2>🏆 Dataset Leaderboard 🏆</h2>
+
+        <div class="btn-container">
+            <button class="toggle-btn active" id="nuscenes-btn" onclick="fetchLeaderboard('NuScenes')">NuScenes</button>
+            <button class="toggle-btn" id="iwildcam-btn" onclick="fetchLeaderboard('iWildCam')">iWildCam</button>
+            <button class="toggle-btn" id="autoarborist-btn" onclick="fetchLeaderboard('AutoArborist')">AutoArborist</button>
+        </div>
+    
+
+        <table class="leaderboard-table">
+            <thead id="leaderboard-header">
+                <!-- Headers will be generated dynamically -->
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- Data will be inserted dynamically -->
+            </tbody>
+        </table>
+    
+    </center>
+
+
+    <br>
+    <hr>
+    <br>
+
+    <center>
+        <h1 name="bibtex" id="bibtex">Bibtex</h1>
+    </center>
+    <div class="col" class="code-col">
+        <code style="font-size: 14px;">
+            <!-- @inproceedings{fu2023dreamsim,<br>
+                &ensp;title={DreamSim: Learning New Dimensions of Human Visual Similarity using Synthetic Data},<br>
+                &ensp;author= {Fu, Stephanie and Tamir, Netanel and Sundaram, Shobhita and Chai, Lucy and Zhang, Richard and Dekel, Tali and Isola, Phillip},<br>
+		&ensp;booktitle={Advances in Neural Information Processing Systems},<br>
+                &ensp;pages={50742--50768},<br>
+		&ensp;volume={36}<br>
+		&ensp;year={2023}<br>
+              } -->
+        </code>
+    </div>
+    <br>
+    <hr>
+</body>
+
+</html>
